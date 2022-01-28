@@ -16,7 +16,7 @@ jobs:
           base-image: "bioconductor/bioconductor_docker"
           base-tag: "RELEASE_3_14"
           build-command: |
-            Rscript -e "BiocManager::install(c('GenomicRanges', 'S4Vectors', 'methods', 'data.table', 'assertthat', 'ggplot2', 'IRanges', 'Gviz', 'AnnotationHub'))" && Rscript -e "install.packages('/home/rstudio/', repos = NULL, type = 'source')"
+            Rscript -e "BiocManager::install(remotes::local_package_deps(dependencies=TRUE))" && Rscript -e "install.packages('/home/rstudio/', repos = NULL, type = 'source')"
       - name: Login to DockerHub
         uses: actions-hub/docker/login@master
         env:
